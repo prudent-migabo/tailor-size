@@ -9,7 +9,12 @@ class RouteGenerator {
     switch (settings.name){
       case SplashScreen.routeName:
         return MaterialPageRoute(builder: (context) => const SplashScreen());
-
+      case WelcomeScreen.routeName:
+        return MaterialPageRoute(builder: (context) => const WelcomeScreen());
+      case RegisterScreen.routeName:
+        return MaterialPageRoute(builder: (context) => const RegisterScreen());
+      case LoginScreen.routeName:
+        return MaterialPageRoute(builder: (context) => const LoginScreen());
       default:
         return errorRoute();
     }

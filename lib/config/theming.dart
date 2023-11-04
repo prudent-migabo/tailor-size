@@ -7,6 +7,7 @@ class AppThemeData {
   static const Color scaffoldColor = Color(0xffFAFAFA);
   static const Color backgroundWhite = Colors.white;
   static const Color backgroundBlack = Colors.black;
+  static const Color backgroundGrey = Colors.grey;
 
   // Colors: Text
   static const textPrimary = Colors.black;
@@ -27,7 +28,7 @@ class AppThemeData {
   static const double fieldRadius = 5;
 
   // Fields side color
-  static const Color fieldSideColor = Colors.black;
+  static const Color fieldSideColor = AppThemeData.buttonPrimary;
 
   // Light Theme
   static final ThemeData lightTheme = ThemeData(
@@ -40,18 +41,18 @@ class AppThemeData {
     inputDecorationTheme:  InputDecorationTheme(
       fillColor: AppThemeData.backgroundWhite,
       filled: true,
-      contentPadding: const EdgeInsets.symmetric(vertical: 22, horizontal: 15),
+      contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(fieldRadius),
         borderSide: const BorderSide(color: fieldSideColor),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(5),
-        borderSide: const BorderSide(color: AppThemeData.backgroundBlack),
+        borderSide: const BorderSide(color: AppThemeData.fieldSideColor),
       ),
       focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(fieldRadius),
-          borderSide: const BorderSide(color: fieldSideColor, width: 2)
+          borderSide: const BorderSide(color: fieldSideColor, width: 1)
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(fieldRadius),
