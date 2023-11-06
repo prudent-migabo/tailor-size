@@ -4,10 +4,11 @@ class AppThemeData {
   // Colors: Main Colors
   static const Color primaryColor = Color(0xff6750A4);
   static const Color secondaryColor = Color(0xffE8DEF8);
-  static const Color scaffoldColor = Color(0xffFAFAFA);
+  static const Color scaffoldColor = Color(0xffFFFAF1);
   static const Color backgroundWhite = Colors.white;
   static const Color backgroundBlack = Colors.black;
   static const Color backgroundGrey = Colors.grey;
+  static const Color listTileBackgroundColor = Color(0xffCAC4D0);
 
   // Colors: Text
   static const textPrimary = Colors.black;
@@ -39,7 +40,7 @@ class AppThemeData {
     iconTheme: const IconThemeData(color: iconPrimary),
     colorScheme: const ColorScheme.light().copyWith(background: scaffoldColor),
     inputDecorationTheme:  InputDecorationTheme(
-      fillColor: AppThemeData.backgroundWhite,
+      fillColor: AppThemeData.scaffoldColor,
       filled: true,
       contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       disabledBorder: OutlineInputBorder(
@@ -68,9 +69,9 @@ class AppThemeData {
         color: textGrey,
       ),
     ),
-    appBarTheme: const AppBarTheme(
-      backgroundColor: scaffoldColor,
-      titleTextStyle: TextStyle(
+    appBarTheme:  AppBarTheme(
+      backgroundColor: listTileBackgroundColor.withOpacity(.3),
+      titleTextStyle: const TextStyle(
         fontFamily: 'Roboto',
         fontSize: 18,
         fontWeight: FontWeight.w600,

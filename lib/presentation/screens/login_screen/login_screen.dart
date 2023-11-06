@@ -54,7 +54,7 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: CustomButton(
-                    onPressed: (){}, text: "S'inscrire"),
+                    onPressed: (){}, text: "Connection"),
               ),
               const SizedBox(height: 15,),
               const Align(

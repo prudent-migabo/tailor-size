@@ -13,16 +13,17 @@ class CustomCardListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: AppThemeData.secondaryColor.withOpacity(.3),
+      elevation: 0,
+      color: AppThemeData.listTileBackgroundColor.withOpacity(.3),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-        side: const BorderSide(color: AppThemeData.backgroundBlack),
+        borderRadius: BorderRadius.circular(10),
+        side:  const BorderSide(color: AppThemeData.backgroundGrey, width: 0.5),
       ),
       child: ListTile(
         leading: CircleAvatar(
-          radius: 40,
+          radius: 20,
           backgroundColor: AppThemeData.primaryColor,
-          child: Text(textInLeading),
+          child: Text(textInLeading, style: const TextStyle(color: Colors.white),),
         ),
         title: Text(title, style: const TextStyle(fontWeight: bold),),
         subtitle: Text(subtitle),
