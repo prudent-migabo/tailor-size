@@ -3,3 +3,5 @@ export 'welcome_screen/welcome_screen.dart';
 export 'register_screen/register_screen.dart';
 export 'login_screen/login_screen.dart';
 export 'dashboard_screen/dashboard_screen.dart';
+export 'client_details_screen/client_details_screen.dart';
+export 'client_personal_details/client_personal_details.dart';

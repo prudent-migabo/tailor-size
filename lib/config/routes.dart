@@ -17,6 +17,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => const LoginScreen());
       case DashboardScreen.routeName:
         return MaterialPageRoute(builder: (context) => const DashboardScreen());
+      case ClientDetailsScreen.routeName:
+      return MaterialPageRoute(builder: (context) => const ClientDetailsScreen());
+      case ClientPersonalDetails.routeName:
+        return MaterialPageRoute(builder: (context) => const ClientPersonalDetails());
       default:
         return errorRoute();
     }
