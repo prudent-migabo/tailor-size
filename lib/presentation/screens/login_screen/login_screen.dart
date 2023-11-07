@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             children: [
               Image.asset(Assets.appLogo),
-              Padding(padding: EdgeInsets.only(top: 40)),
+              const Padding(padding: EdgeInsets.only(top: 40)),
               CustomGoogleSigninButton(onPressed: () {}),
               const SizedBox(
                 height: 13,
@@ -54,7 +54,9 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: CustomButton(
-                    onPressed: (){}, text: "Connection"),
+                    onPressed: (){
+                      Navigator.pushNamed(context, DashboardScreen.routeName);
+                    }, text: "Connexion"),
               ),
               const SizedBox(height: 15,),
               const Align(

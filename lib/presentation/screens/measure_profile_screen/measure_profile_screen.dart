@@ -13,7 +13,9 @@ class MeasureProfileScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         leading: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.pop(context);
+          },
           child: const Icon(
             Icons.arrow_back,
             color: AppThemeData.iconBlack,

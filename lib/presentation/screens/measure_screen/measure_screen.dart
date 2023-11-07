@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tailor_size/config/theming.dart';
+import 'package:tailor_size/presentation/presentation.dart';
 import 'package:tailor_size/statics/constants.dart';
 import 'package:tailor_size/utils/measure_decoration.dart';
 
@@ -13,7 +14,9 @@ class MeasureScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         leading: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.pop(context);
+          },
           child: const Icon(
             Icons.arrow_back,
             color: AppThemeData.iconBlack,
@@ -24,10 +27,14 @@ class MeasureScreen extends StatelessWidget {
           style: TextStyle(
               color: AppThemeData.textBlack, fontWeight: FontWeight.normal),
         ),
-        actions: const [
+        actions:  [
           Padding(
-            padding: EdgeInsets.only(right: 20.0, top: 20),
-            child: Text('Suivant', style: TextStyle(color: AppThemeData.textBlack),),
+            padding: const EdgeInsets.only(right: 20.0, top: 20),
+            child: GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(context, MeasureProfileScreen.routeName);
+              },
+                child: const Text('Suivant', style: TextStyle(color: AppThemeData.textBlack),)),
           ),
         ],
       ),

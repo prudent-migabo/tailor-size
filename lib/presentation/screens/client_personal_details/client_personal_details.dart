@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tailor_size/config/theming.dart';
+import 'package:tailor_size/presentation/presentation.dart';
 import 'package:tailor_size/statics/constants.dart';
 import 'package:tailor_size/utils/utils.dart';
 
@@ -21,7 +22,9 @@ class _ClientPersonalDetailsState extends State<ClientPersonalDetails> {
       appBar: AppBar(
         elevation: 0,
         leading: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.pop(context);
+          },
           child: const Icon(
             Icons.arrow_back,
             color: AppThemeData.iconBlack,
@@ -35,7 +38,11 @@ class _ClientPersonalDetailsState extends State<ClientPersonalDetails> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20.0, top: 20),
-            child: Text('Suivant', style: TextStyle(color: AppThemeData.textBlack),),
+            child: GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(context, MeasureScreen.routeName);
+              },
+                child: const Text('Suivant', style: TextStyle(color: AppThemeData.textBlack),)),
           ),
         ],
       ),
