@@ -44,18 +44,11 @@ class _ClientPersonalDetailsState extends State<ClientPersonalDetails> {
         child: Column(
           children: [
             TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Noms',
-                hintStyle: TextStyle(fontSize: 14)
-              ),
+              decoration: customFieldDecoration('Noms'),
             ),
             const SizedBox(height: 18,),
             DropdownButtonFormField(
-                decoration: const InputDecoration(
-                  // contentPadding:  EdgeInsets.only(bottom: 20, left: 20, right: 20),
-                  hintText: 'Profession',
-                    hintStyle: TextStyle(fontSize: 14)
-                ),
+                decoration:  customFieldDecoration('Profession'),
                 items: ListsHelper.professions.map((item)
                 => DropdownMenuItem(
                     value: item,
@@ -67,17 +60,11 @@ class _ClientPersonalDetailsState extends State<ClientPersonalDetails> {
                 }),
             const SizedBox(height: 18,),
             TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Téléphone',
-                  hintStyle: TextStyle(fontSize: 14)
-              ),
+              decoration:  customFieldDecoration('Téléphone')
             ),
             const SizedBox(height: 18,),
             TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'E-mail',
-                  hintStyle: TextStyle(fontSize: 14)
-              ),
+              decoration:  customFieldDecoration('E-mail'),
             ),
           ],
         ),

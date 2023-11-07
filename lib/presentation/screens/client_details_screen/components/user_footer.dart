@@ -10,11 +10,11 @@ class UserFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.asset(Assets.shoulder1),
+        Expanded(child: Image.asset(Assets.shoulder1)),
         const SizedBox(width: 20),
-        Image.asset(Assets.belly1),
+        Expanded(child: Image.asset(Assets.belly1)),
         const SizedBox(width: 20),
-        Image.asset(Assets.bust1),
+        Expanded(child: Image.asset(Assets.bust1)),
       ],
     );
   }

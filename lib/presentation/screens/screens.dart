@@ -5,3 +5,5 @@ export 'login_screen/login_screen.dart';
 export 'dashboard_screen/dashboard_screen.dart';
 export 'client_details_screen/client_details_screen.dart';
 export 'client_personal_details/client_personal_details.dart';
+export 'measure_screen/measure_screen.dart';
+export 'measure_profile_screen/measure_profile_screen.dart';

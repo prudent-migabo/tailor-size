@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Tailor size',
       theme: AppThemeData.lightTheme,
       onGenerateRoute: RouteGenerator.onGeneratedRoutes,
-      initialRoute: ClientPersonalDetails.routeName,
+      initialRoute: MeasureProfileScreen.routeName,
     );
   }
 }
