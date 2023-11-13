@@ -39,6 +39,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SelectBustCubit(),
         ),
+        BlocProvider(
+          create: (context) => ClientCubit(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

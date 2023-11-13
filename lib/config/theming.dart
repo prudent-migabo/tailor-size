@@ -9,6 +9,7 @@ class AppThemeData {
   static const Color backgroundBlack = Colors.black;
   static const Color backgroundGrey = Colors.grey;
   static const Color listTileBackgroundColor = Color(0xffCAC4D0);
+  static const Color backgroundGreen = Colors.green;
 
   // Colors: Text
   static const textPrimary = Colors.black;

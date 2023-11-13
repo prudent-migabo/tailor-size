@@ -1,11 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tailor_size/data/data.dart';
 
 class ClientRepository {
+  CollectionReference clientRef =
+      FirebaseFirestore.instance.collection('clients');
 
-  CollectionReference clientRef = FirebaseFirestore.instance.collection('clients');
-
-  Future<void> createClient (Map<String, dynamic> data) async{
+  Future<void> createClient(Map<String, dynamic> data) async {
     await clientRef.add(data);
   }
 
+  Future<void> updateClient({required Map<String, dynamic> data, required String clientID}) async{
+    await clientRef.doc(clientID).update(data);
+  }
+
+  Stream<ClientModel> getClient(String clientID){
+    return clientRef.doc(clientID).snapshots().map((event) => ClientModel.fromMap(event));
+  }
+
+  Future<void> getClientDetails() async{}
+
+  Stream<List<ClientModel>> listClients() {
+    return clientRef
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((event) => event.docs.map((e) => ClientModel.fromMap(e)).toList());
+  }
 }

@@ -44,6 +44,7 @@ dependencies:
   bloc:
   flutter_bloc:
   equatable:
+  fluttertoast:
 
 dev_dependencies:
   flutter_test:

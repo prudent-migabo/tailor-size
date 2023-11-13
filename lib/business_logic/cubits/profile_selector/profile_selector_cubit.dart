@@ -20,6 +20,10 @@ class SelectShoulderCubit extends Cubit<int> {
         emit(0);
     }
   }
+
+  void initial(){
+    emit(0);
+  }
 }
 
 class SelectBellyCubit extends Cubit<int> {
@@ -36,6 +40,10 @@ class SelectBellyCubit extends Cubit<int> {
       default:
         emit(0);
     }
+  }
+
+  void initial(){
+    emit(0);
   }
 }
 
@@ -54,6 +62,10 @@ class SelectBustCubit extends Cubit<int> {
       default:
         emit(0);
     }
+  }
+
+  void initial(){
+    emit(0);
   }
 }
 

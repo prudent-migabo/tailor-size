@@ -9,25 +9,29 @@ enum ClientStatus {
 
 class ClientState extends Equatable {
   @override
-  List<Object?> get props => [clientStatus, error];
+  List<Object?> get props => [clientStatus, error, clients];
 
   ClientStatus clientStatus;
   String error;
+  List<ClientModel> clients;
 
 //<editor-fold desc="Data Methods">
   ClientState({
     required this.clientStatus,
     required this.error,
+    required this.clients,
   });
 
 
   ClientState copyWith({
     ClientStatus? clientStatus,
     String? error,
+    List<ClientModel>? clients,
   }) {
     return ClientState(
       clientStatus: clientStatus ?? this.clientStatus,
       error: error ?? this.error,
+      clients: clients ?? this.clients,
     );
   }
 
@@ -36,6 +40,7 @@ class ClientState extends Equatable {
     return ClientState(
       clientStatus: ClientStatus.initial,
       error: '',
+      clients: const [],
     );
   }
 

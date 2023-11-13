@@ -5,15 +5,17 @@ import 'package:tailor_size/presentation/presentation.dart';
 import 'package:tailor_size/statics/constants.dart';
 import 'package:tailor_size/utils/utils.dart';
 
-class ClientPersonalDetails extends StatefulWidget {
-  static const String routeName = '/ClientPersonalDetails';
-  const ClientPersonalDetails({Key? key}) : super(key: key);
+class UpdateClientPersonalDetails extends StatefulWidget {
+  static const String routeName = '/UpdateClientPersonalDetails';
+  const UpdateClientPersonalDetails({Key? key, required this.clientArguments}) : super(key: key);
+
+  final ClientArguments clientArguments;
 
   @override
-  State<ClientPersonalDetails> createState() => _ClientPersonalDetailsState();
+  State<UpdateClientPersonalDetails> createState() => _UpdateClientPersonalDetailsState();
 }
 
-class _ClientPersonalDetailsState extends State<ClientPersonalDetails> {
+class _UpdateClientPersonalDetailsState extends State<UpdateClientPersonalDetails> {
 
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _names = TextEditingController();
@@ -23,12 +25,38 @@ class _ClientPersonalDetailsState extends State<ClientPersonalDetails> {
 
   onSubmit(){
     if(!_formKey.currentState!.validate()) return;
-    Navigator.pushNamed(context, MeasureScreen.routeName, arguments: ClientArguments(clientModel: ClientModel(
+    Navigator.pushNamed(context, UpdateMeasureScreen.routeName, arguments: ClientArguments(clientModel: ClientModel(
       fullName: _names.text.trim(),
       phone: _phone.text.trim(),
       email: _email.text.trim(),
       profession: profession,
+      c: widget.clientArguments.clientModel.c,
+      cb1: widget.clientArguments.clientModel.cb1,
+      cb2: widget.clientArguments.clientModel.cb2,
+      cf: widget.clientArguments.clientModel.cf,
+      cc1: widget.clientArguments.clientModel.cc1,
+      cp: widget.clientArguments.clientModel.cp,
+      cc2: widget.clientArguments.clientModel.cc2,
+      cv: widget.clientArguments.clientModel.cv,
+      ep: widget.clientArguments.clientModel.ep,
+      lt: widget.clientArguments.clientModel.lt,
+      ltp: widget.clientArguments.clientModel.ltp,
+      p: widget.clientArguments.clientModel.p,
+      tc: widget.clientArguments.clientModel.tc,
+      clientID: widget.clientArguments.clientModel.clientID,
+      shoulder: widget.clientArguments.clientModel.shoulder,
+      belly: widget.clientArguments.clientModel.belly,
+      bust: widget.clientArguments.clientModel.bust,
     )));
+  }
+
+  @override
+  void initState() {
+    _names.text = widget.clientArguments.clientModel.fullName!;
+    _phone.text = widget.clientArguments.clientModel.phone!;
+    _email.text = widget.clientArguments.clientModel.email!;
+    profession = widget.clientArguments.clientModel.profession!;
+    super.initState();
   }
 
 
@@ -56,7 +84,7 @@ class _ClientPersonalDetailsState extends State<ClientPersonalDetails> {
             padding: const EdgeInsets.only(right: 20.0, top: 20),
             child: GestureDetector(
               onTap: onSubmit,
-                child: const Text('Suivant', style: TextStyle(color: AppThemeData.textBlack),),),
+              child: const Text('Suivant', style: TextStyle(color: AppThemeData.textBlack),),),
           ),
         ],
       ),
@@ -73,7 +101,7 @@ class _ClientPersonalDetailsState extends State<ClientPersonalDetails> {
               ),
               const SizedBox(height: 18,),
               DropdownButtonFormField(
-                  decoration:  customFieldDecoration('Profession'),
+                  decoration:  customFieldDecoration(profession),
                   items: ListsHelper.professions.map((item)
                   => DropdownMenuItem(
                       value: item,

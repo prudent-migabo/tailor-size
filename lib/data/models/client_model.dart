@@ -6,7 +6,7 @@ class ClientModel {
   String? phone;
   String? email;
   String? lt;
-  String? cc;
+  String? cc1;
   String? cv;
   String? ltp;
   String? cp;
@@ -15,7 +15,7 @@ class ClientModel {
   String? cc2;
   String? c;
   String? tc;
-  String? cb;
+  String? cb1;
   String? p;
   String? cb2;
   int? shoulder;
@@ -31,7 +31,7 @@ class ClientModel {
     this.phone,
     this.email,
     this.lt,
-    this.cc,
+    this.cc1,
     this.cv,
     this.ltp,
     this.cp,
@@ -40,7 +40,7 @@ class ClientModel {
     this.cc2,
     this.c,
     this.tc,
-    this.cb,
+    this.cb1,
     this.p,
     this.cb2,
     this.shoulder,
@@ -58,7 +58,7 @@ class ClientModel {
       'phone': phone,
       'email': email,
       'lt': lt,
-      'cc': cc,
+      'cc': cc1,
       'cv': cv,
       'ltp': ltp,
       'cp': cp,
@@ -67,7 +67,7 @@ class ClientModel {
       'cc2': cc2,
       'c': c,
       'tc': tc,
-      'cb': cb,
+      'cb': cb1,
       'p': p,
       'cb2': cb2,
       'shoulder': shoulder,
@@ -85,7 +85,7 @@ class ClientModel {
       phone: map['phone'] ?? '',
       email: map['email'] ?? '',
       lt: map['lt'] ?? '',
-      cc: map['cc'] ?? '',
+      cc1: map['cc'] ?? '',
       cv: map['cv'] ?? '',
       ltp: map['ltp'] ?? '',
       cp: map['cp'] ?? '',
@@ -94,7 +94,7 @@ class ClientModel {
       cc2: map['cc2'] ?? '',
       c: map['c'] ?? '',
       tc: map['tc'] ?? '',
-      cb: map['cb'] ?? '',
+      cb1: map['cb'] ?? '',
       p: map['p'] ?? '',
       cb2: map['cb2'] ?? '',
       shoulder: map['shoulder'] ?? 0,

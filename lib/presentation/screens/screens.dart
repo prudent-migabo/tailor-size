@@ -7,3 +7,6 @@ export 'client_details_screen/client_details_screen.dart';
 export 'client_personal_details/client_personal_details.dart';
 export 'measure_screen/measure_screen.dart';
 export 'measure_profile_screen/measure_profile_screen.dart';
+export 'update_client_personal_details/update_client_personal_details.dart';
+export 'update_measure_screen/update_measure_screen.dart';
+export 'update_profile_measure_screen/update_measure_profile_screen.dart';

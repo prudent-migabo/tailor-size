@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tailor_size/data/models/client_arguments.dart';
 import 'package:tailor_size/presentation/presentation.dart';
 
 class RouteGenerator {
@@ -18,13 +19,31 @@ class RouteGenerator {
       case DashboardScreen.routeName:
         return MaterialPageRoute(builder: (context) => const DashboardScreen());
       case ClientDetailsScreen.routeName:
-      return MaterialPageRoute(builder: (context) => const ClientDetailsScreen());
+      return MaterialPageRoute(builder: (context) =>  ClientDetailsScreen(
+        clientArguments: settings.arguments as ClientArguments,
+      ));
       case ClientPersonalDetails.routeName:
         return MaterialPageRoute(builder: (context) => const ClientPersonalDetails());
       case MeasureScreen.routeName:
-        return MaterialPageRoute(builder: (context) => const MeasureScreen());
+        return MaterialPageRoute(builder: (context) =>  MeasureScreen(
+          clientArguments: settings.arguments as ClientArguments,
+        ),);
       case MeasureProfileScreen.routeName:
-        return MaterialPageRoute(builder: (context) => const MeasureProfileScreen());
+        return MaterialPageRoute(builder: (context) =>  MeasureProfileScreen(
+          clientArguments: settings.arguments as ClientArguments,
+        ));
+      case UpdateClientPersonalDetails.routeName:
+        return MaterialPageRoute(builder: (context) =>  UpdateClientPersonalDetails(
+          clientArguments: settings.arguments as ClientArguments,
+        ));
+      case UpdateMeasureScreen.routeName:
+        return MaterialPageRoute(builder: (context) =>  UpdateMeasureScreen(
+          clientArguments: settings.arguments as ClientArguments,
+        ));
+      case UpdateMeasureProfileScreen.routeName:
+        return MaterialPageRoute(builder: (context) =>  UpdateMeasureProfileScreen(
+          clientArguments: settings.arguments as ClientArguments,
+        ));
       default:
         return errorRoute();
     }

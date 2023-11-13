@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
@@ -6,7 +8,17 @@ import 'package:tailor_size/data/data.dart';
 part 'client_state.dart';
 
 class ClientCubit extends Cubit<ClientState> {
-  ClientCubit() : super(ClientState.initial());
+  ClientCubit() : super(ClientState.initial()){
+    listClients();
+  }
+
+  StreamSubscription? subscription;
+
+  StreamSubscription<List<ClientModel>> listClients (){
+    return subscription = ClientRepository().listClients().listen((event) {
+      emit(state.copyWith(clients: event));
+    });
+  }
 
   Future<void> createClient (ClientModel clientModel) async{
     try{
@@ -16,6 +28,22 @@ class ClientCubit extends Cubit<ClientState> {
     } catch (e){
       emit(state.copyWith(clientStatus: ClientStatus.error, error: e.toString()),);
     }
+  }
+
+  Future<void> updateClient ({required ClientModel clientModel, required String clientID}) async{
+    try{
+      emit(state.copyWith(clientStatus: ClientStatus.submitting),);
+      await ClientRepository().updateClient(data: clientModel.toMap(), clientID: clientID);
+      emit(state.copyWith(clientStatus: ClientStatus.submitted),);
+    } catch (e){
+      emit(state.copyWith(clientStatus: ClientStatus.error, error: e.toString()),);
+    }
+  }
+
+  @override
+  Future<void> close() {
+    subscription!.cancel();
+    return super.close();
   }
 
 }

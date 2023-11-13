@@ -6,17 +6,17 @@ import 'package:tailor_size/presentation/presentation.dart';
 import 'package:tailor_size/statics/constants.dart';
 import 'package:tailor_size/utils/measure_decoration.dart';
 
-class MeasureScreen extends StatefulWidget {
-  static const String routeName = '/MeasureScreen';
-  const MeasureScreen({Key? key, required this.clientArguments}) : super(key: key);
+class UpdateMeasureScreen extends StatefulWidget {
+  static const String routeName = '/UpdateMeasureScreen';
+  const UpdateMeasureScreen({Key? key, required this.clientArguments}) : super(key: key);
 
   final ClientArguments clientArguments;
 
   @override
-  State<MeasureScreen> createState() => _MeasureScreenState();
+  State<UpdateMeasureScreen> createState() => _UpdateMeasureScreenState();
 }
 
-class _MeasureScreenState extends State<MeasureScreen> {
+class _UpdateMeasureScreenState extends State<UpdateMeasureScreen> {
   final TextEditingController _lt = TextEditingController();
   final TextEditingController _cc1 = TextEditingController();
   final TextEditingController _cv = TextEditingController();
@@ -32,7 +32,7 @@ class _MeasureScreenState extends State<MeasureScreen> {
   final TextEditingController _cb2 = TextEditingController();
 
   onSubmit(){
-    Navigator.pushNamed(context, MeasureProfileScreen.routeName, arguments: ClientArguments(clientModel: ClientModel(
+    Navigator.pushNamed(context, UpdateMeasureProfileScreen.routeName, arguments: ClientArguments(clientModel: ClientModel(
       fullName: widget.clientArguments.clientModel.fullName,
       profession: widget.clientArguments.clientModel.profession,
       email: widget.clientArguments.clientModel.email,
@@ -50,7 +50,29 @@ class _MeasureScreenState extends State<MeasureScreen> {
       ltp: _ltp.text.trim(),
       p: _p.text.trim(),
       tc: _tc.text.trim(),
+      clientID: widget.clientArguments.clientModel.clientID,
+      shoulder: widget.clientArguments.clientModel.shoulder,
+      belly: widget.clientArguments.clientModel.belly,
+      bust: widget.clientArguments.clientModel.bust,
     )));
+  }
+
+  @override
+  void initState() {
+    _lt.text = '${widget.clientArguments.clientModel.lt}cm';
+    _cc1.text = '${widget.clientArguments.clientModel.cc1}cm';
+    _cv.text = '${widget.clientArguments.clientModel.cv}cm';
+    _ltp.text = '${widget.clientArguments.clientModel.ltp}cm';
+    _cp.text = '${widget.clientArguments.clientModel.cp}cm';
+    _cf.text = '${widget.clientArguments.clientModel.cf}cm';
+    _ep.text = '${widget.clientArguments.clientModel.ep}cm';
+    _cc2.text = '${widget.clientArguments.clientModel.cc2}cm';
+    _c.text = '${widget.clientArguments.clientModel.c}cm';
+    _tc.text = '${widget.clientArguments.clientModel.tc}cm';
+    _cb1.text = '${widget.clientArguments.clientModel.cb1}cm';
+    _p.text = '${widget.clientArguments.clientModel.p}cm';
+    _cb2.text = '${widget.clientArguments.clientModel.cb2}cm';
+    super.initState();
   }
 
   @override
@@ -77,7 +99,7 @@ class _MeasureScreenState extends State<MeasureScreen> {
             padding: const EdgeInsets.only(right: 20.0, top: 20),
             child: GestureDetector(
               onTap: onSubmit,
-                child: const Text('Suivant', style: TextStyle(color: AppThemeData.textBlack),),),
+              child: const Text('Suivant', style: TextStyle(color: AppThemeData.textBlack),),),
           ),
         ],
       ),
@@ -89,13 +111,11 @@ class _MeasureScreenState extends State<MeasureScreen> {
               children: [
                 Expanded(
                     child: TextFormField(
-                      keyboardType: TextInputType.number,
                       controller: _lt,
-                  decoration: customFieldDecoration('LT'),
-                )),
+                      decoration: customFieldDecoration('LT'),
+                    )),
                 horizontalSpacer10,
                 Expanded(child: TextFormField(
-                  keyboardType: TextInputType.number,
                   controller: _cc1,
                   decoration: customFieldDecoration('CC'),
                 )),
@@ -105,13 +125,11 @@ class _MeasureScreenState extends State<MeasureScreen> {
             Row(
               children: [
                 Expanded(child: TextFormField(
-                  keyboardType: TextInputType.number,
                   controller: _cv,
                   decoration: customFieldDecoration('CV'),
                 )),
                 horizontalSpacer10,
                 Expanded(child: TextFormField(
-                  keyboardType: TextInputType.number,
                   controller: _ltp,
                   decoration: customFieldDecoration('LTP'),
                 )),
@@ -121,13 +139,11 @@ class _MeasureScreenState extends State<MeasureScreen> {
             Row(
               children: [
                 Expanded(child: TextFormField(
-                  keyboardType: TextInputType.number,
                   controller: _cp,
                   decoration: customFieldDecoration('CP'),
                 )),
                 horizontalSpacer10,
                 Expanded(child: TextFormField(
-                  keyboardType: TextInputType.number,
                   controller: _cf,
                   decoration: customFieldDecoration('CF'),
                 )),
@@ -137,13 +153,11 @@ class _MeasureScreenState extends State<MeasureScreen> {
             Row(
               children: [
                 Expanded(child: TextFormField(
-                  keyboardType: TextInputType.number,
                   controller: _ep,
                   decoration: customFieldDecoration('EP'),
                 )),
                 horizontalSpacer10,
                 Expanded(child: TextFormField(
-                  keyboardType: TextInputType.number,
                   controller: _cc2,
                   decoration: customFieldDecoration('Cc'),
                 )),
@@ -153,13 +167,11 @@ class _MeasureScreenState extends State<MeasureScreen> {
             Row(
               children: [
                 Expanded(child: TextFormField(
-                  keyboardType: TextInputType.number,
                   controller: _c,
                   decoration: customFieldDecoration('C'),
                 )),
                 horizontalSpacer10,
                 Expanded(child: TextFormField(
-                  keyboardType: TextInputType.number,
                   controller: _tc,
                   decoration: customFieldDecoration('TC'),
                 )),
@@ -169,13 +181,11 @@ class _MeasureScreenState extends State<MeasureScreen> {
             Row(
               children: [
                 Expanded(child: TextFormField(
-                  keyboardType: TextInputType.number,
                   controller: _cb1,
                   decoration: customFieldDecoration('CB'),
                 )),
                 horizontalSpacer10,
                 Expanded(child: TextFormField(
-                  keyboardType: TextInputType.number,
                   controller: _p,
                   decoration: customFieldDecoration('P'),
                 )),
@@ -185,12 +195,11 @@ class _MeasureScreenState extends State<MeasureScreen> {
             Row(
               children: [
                 Expanded(child: TextFormField(
-                  keyboardType: TextInputType.number,
                   controller: _cb2,
                   decoration: customFieldDecoration('Cb'),
                 )),
                 horizontalSpacer10,
-               Expanded(child: Container()),
+                Expanded(child: Container()),
               ],
             ),
           ],

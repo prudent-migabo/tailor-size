@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tailor_size/config/theming.dart';
 
 import '../statics/statics.dart';
@@ -59,5 +60,14 @@ void warningDialog(BuildContext context, {required String? content, VoidCallback
 
   showDialog(
       barrierDismissible: barrierDismissible ?? false, context: context, builder: (context) => alert);
+}
+
+
+void successToast({required String message}) {
+  Fluttertoast.showToast(
+      msg: message,
+      backgroundColor: AppThemeData.backgroundGreen,
+      textColor: Colors.white,
+      gravity: ToastGravity.TOP);
 }
 
