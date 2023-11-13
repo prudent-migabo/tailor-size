@@ -5,6 +5,7 @@ import 'package:tailor_size/statics/assets.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = '/SplashScreen';
+
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
@@ -12,14 +13,17 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 5), (){
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginScreen()), (route) => false);
+    Future.delayed(const Duration(seconds: 5), () {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const Wrapper()),
+          (route) => false);
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,4 +33,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-

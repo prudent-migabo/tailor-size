@@ -1,5 +1,5 @@
-import 'package:avec/config/theming.dart';
 import 'package:flutter/material.dart';
+import 'package:tailor_size/config/theming.dart';
 
 import '../statics/statics.dart';
 

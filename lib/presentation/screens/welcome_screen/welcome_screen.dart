@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tailor_size/config/theming.dart';
+import 'package:tailor_size/presentation/presentation.dart';
 import 'package:tailor_size/presentation/widgets/custom_button.dart';
 import 'package:tailor_size/statics/statics.dart';
 
@@ -22,12 +23,16 @@ class WelcomeScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  CustomButton(onPressed: (){}, text: 'Créer un compte'),
+                  CustomButton(onPressed: (){
+                    Navigator.pushNamed(context, RegisterScreen.routeName);
+                  }, text: 'Créer un compte'),
                   const SizedBox(height: 20,),
                   CustomButton(
                     elevation: 0,
                     backgroundColor: Colors.grey.withOpacity(.4),
-                      onPressed: (){}, text: 'Se connecter', textColor: AppThemeData.textGrey.withOpacity(.5),)
+                      onPressed: (){
+                      Navigator.pushNamed(context, LoginScreen.routeName);
+                      }, text: 'Se connecter', textColor: AppThemeData.textGrey.withOpacity(.5),)
                 ],
               ),
             ],

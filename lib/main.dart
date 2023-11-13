@@ -1,12 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:tailor_size/business_logic/business_logic.dart';
 import 'package:tailor_size/config/routes.dart';
 import 'package:tailor_size/config/theming.dart';
 import 'package:tailor_size/presentation/presentation.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'firebase_options.dart';
 
-void main() async{
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -19,12 +22,31 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-     debugShowCheckedModeBanner: false,
-      title: 'Tailor size',
-      theme: AppThemeData.lightTheme,
-      onGenerateRoute: RouteGenerator.onGeneratedRoutes,
-      initialRoute: SplashScreen.routeName,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AuthStreamCubit(),
+        ),
+        BlocProvider(
+          create: (context) => AuthCubit(),
+        ),
+        BlocProvider(
+          create: (context) => SelectShoulderCubit(),
+        ),
+        BlocProvider(
+          create: (context) => SelectBellyCubit(),
+        ),
+        BlocProvider(
+          create: (context) => SelectBustCubit(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Tailor size',
+        theme: AppThemeData.lightTheme,
+        onGenerateRoute: RouteGenerator.onGeneratedRoutes,
+        initialRoute: SplashScreen.routeName,
+      ),
     );
   }
 }

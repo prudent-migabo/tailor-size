@@ -4,13 +4,13 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 import 'package:tailor_size/data/data.dart';
-
 import 'auth_stream_state.dart';
 
-part 'auth_stream_state.dart';
 
 class AuthStreamCubit extends Cubit<AuthStreamState> {
-  AuthStreamCubit() : super(AuthStreamInitial());
+  AuthStreamCubit() : super(AuthStreamState.initial()){
+    monitorAuthStreamCubit();
+  }
 
   StreamSubscription? subscription;
 

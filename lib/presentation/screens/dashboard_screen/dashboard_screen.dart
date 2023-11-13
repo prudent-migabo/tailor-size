@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tailor_size/config/theming.dart';
+import 'package:tailor_size/data/data.dart';
 import 'package:tailor_size/presentation/presentation.dart';
 import 'package:tailor_size/presentation/widgets/custom_appbar.dart';
 import 'package:tailor_size/presentation/widgets/custom_card_list_tile.dart';
@@ -25,15 +26,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
         // backgroundColor: AppThemeData.listTileBackgroundColor.withOpacity(.3),
         leading: Padding(
           padding: const EdgeInsets.only(left: 20.0),
-          child: Container(
-            height: 20,
-              width: 20,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(Assets.appLogo),
-                  fit: BoxFit.contain,
+          child: GestureDetector(
+            onTap: (){
+              AuthRepository().signOutUser();
+              Navigator.pushNamedAndRemoveUntil(context, WelcomeScreen.routeName, (route) => false);
+            },
+            child: Container(
+              height: 20,
+                width: 20,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(Assets.appLogo),
+                    fit: BoxFit.contain,
+                  ),
                 ),
-              ),
+            ),
           ),
         ),
         title: isTextFieldHidden ? Container() : TextField(
@@ -62,7 +69,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 borderRadius: BorderRadius.circular(30),
               ),
             hintText: 'Rechercher un client',
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               fontSize: 13,
               color: Colors.white
             )
