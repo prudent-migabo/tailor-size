@@ -22,7 +22,31 @@ class ClientRepository {
   Stream<List<ClientModel>> listClients() {
     return clientRef
         .orderBy('createdAt', descending: true)
+        .snapshots(includeMetadataChanges: true)
+        .map((event) => event.docs.map((e) => ClientModel.fromMap(e)).toList());
+  }
+
+
+  Future<String> listClientsNames() async{
+    var res = await clientRef.get();
+    for (var element in res.docs) {
+      if(element.exists){
+        Map? value = element.data() as Map;
+        print('!!!!!!!!!!!!!! ${value['fullName']}');
+        return value['fullName'];
+      } else {
+        return '';
+      }
+    }
+    return '';
+  }
+
+  Stream<List<ClientModel>> listClientsByName(String fullName) {
+    return clientRef
+        .where('fullName', isEqualTo: fullName)
+        .orderBy('createdAt', descending: true)
         .snapshots()
         .map((event) => event.docs.map((e) => ClientModel.fromMap(e)).toList());
   }
+
 }

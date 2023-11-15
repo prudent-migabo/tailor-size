@@ -14,7 +14,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseFirestore.instance.settings = Settings(
+  // await FirebaseFirestore.instance.enablePersistence();
+  FirebaseFirestore.instance.settings = const Settings(
     persistenceEnabled: true,
   );
   runApp(const MyApp());

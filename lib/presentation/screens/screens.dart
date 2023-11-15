@@ -10,3 +10,4 @@ export 'measure_profile_screen/measure_profile_screen.dart';
 export 'update_client_personal_details/update_client_personal_details.dart';
 export 'update_measure_screen/update_measure_screen.dart';
 export 'update_profile_measure_screen/update_measure_profile_screen.dart';
+export 'search_result_screen/search_result_screen.dart';

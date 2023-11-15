@@ -4,9 +4,10 @@ import 'package:tailor_size/business_logic/business_logic.dart';
 import 'package:tailor_size/config/theming.dart';
 import 'package:tailor_size/data/data.dart';
 import 'package:tailor_size/presentation/presentation.dart';
+import 'package:tailor_size/presentation/screens/dashboard_screen/components/components.dart';
 import 'package:tailor_size/presentation/widgets/custom_appbar.dart';
-import 'package:tailor_size/presentation/widgets/custom_card_list_tile.dart';
 import 'package:tailor_size/statics/statics.dart';
+import 'package:tailor_size/utils/utils.dart';
 
 class DashboardScreen extends StatefulWidget {
   static const String routeName = '/DashboardScreen';
@@ -19,65 +20,60 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   bool isTextFieldHidden = true;
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.clear();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: navigationDrawer(context),
       appBar: AppBar(
         elevation: 0,
         // backgroundColor: AppThemeData.listTileBackgroundColor.withOpacity(.3),
         leading: Padding(
           padding: const EdgeInsets.only(left: 20.0),
-          child: GestureDetector(
-            onTap: () {
-              AuthRepository().signOutUser();
-              Navigator.pushNamedAndRemoveUntil(
-                  context, WelcomeScreen.routeName, (route) => false);
-            },
-            child: Container(
-              height: 20,
-              width: 20,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(Assets.appLogo),
-                  fit: BoxFit.contain,
+          child: Builder(
+            builder: (context) {
+              return GestureDetector(
+                onTap: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                child: Container(
+                  height: 20,
+                  width: 20,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(Assets.appLogo),
+                      fit: BoxFit.contain,
+                    ),
+                  ),
                 ),
-              ),
-            ),
+              );
+            }
           ),
         ),
         title: isTextFieldHidden
             ? Container()
             : TextField(
+          controller: _controller,
                 style: const TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                    contentPadding:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                    fillColor: AppThemeData.backgroundGrey,
-                    filled: true,
-                    disabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: const BorderSide(color: Colors.transparent),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: const BorderSide(color: Colors.transparent),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(
-                            color: Colors.transparent, width: 1)),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: const BorderSide(color: Colors.transparent),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    hintText: 'Rechercher un client',
-                    hintStyle:
-                        const TextStyle(fontSize: 13, color: Colors.white)),
-                onChanged: (val) {},
+                decoration: dashboardFieldDecor(),
+                textInputAction: TextInputAction.search,
+                keyboardType: TextInputType.text,
+                onSubmitted: (String value) {
+                  _controller.clear();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SearchResultScreen(
+                                value: value,
+                              )));
+                },
               ),
         actions: [
           Padding(
@@ -100,55 +96,52 @@ class _DashboardScreenState extends State<DashboardScreen> {
           Navigator.pushNamed(context, ClientPersonalDetails.routeName);
         },
       ),
-      body: SingleChildScrollView(
-        padding: padding20,
-        child: BlocBuilder<ClientCubit, ClientState>(
-          builder: (context, state) {
-            return state.clients.isEmpty
-                ? const Center(
-                    child: Text('Aucun client enregistré'),
-                  )
-                : ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: state.clients.length,
-                    itemBuilder: (context, index) {
-                      final data = state.clients[index];
-                      return CustomCardListTile(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, ClientDetailsScreen.routeName,
-                                arguments: ClientArguments(
-                                    clientModel: ClientModel(
-                                  bust: data.bust,
-                                  belly: data.belly,
-                                  shoulder: data.shoulder,
-                                  cb1: data.cb1,
-                                  c: data.c,
-                                  cb2: data.cb2,
-                                  cf: data.cf,
-                                  cc1: data.cc1,
-                                  cp: data.cp,
-                                  cc2: data.cc2,
-                                  cv: data.cv,
-                                  ep: data.ep,
-                                  lt: data.lt,
-                                  ltp: data.ltp,
-                                  p: data.p,
-                                  tc: data.tc,
-                                  phone: data.phone,
-                                  email: data.email,
-                                  profession: data.profession,
-                                  clientID: data.clientID,
-                                  fullName: data.fullName,
-                                )));
-                          },
-                          textInLeading: data.fullName![0].toUpperCase(),
-                          title: data.fullName!,
-                          subtitle: data.profession!);
-                    });
-          },
-        ),
+      body: BlocBuilder<ClientCubit, ClientState>(
+        builder: (context, state) {
+          return state.clients.isEmpty
+              ? const Center(
+                  child: Text('Aucun client enregistré'),
+                )
+              : ListView.builder(
+            padding: padding20,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: state.clients.length,
+                  itemBuilder: (context, index) {
+                    final data = state.clients[index];
+                    return CustomCardListTile(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, ClientDetailsScreen.routeName,
+                              arguments: ClientArguments(
+                                  clientModel: ClientModel(
+                                bust: data.bust,
+                                belly: data.belly,
+                                shoulder: data.shoulder,
+                                cb1: data.cb1,
+                                c: data.c,
+                                cb2: data.cb2,
+                                cf: data.cf,
+                                cc1: data.cc1,
+                                cp: data.cp,
+                                cc2: data.cc2,
+                                cv: data.cv,
+                                ep: data.ep,
+                                lt: data.lt,
+                                ltp: data.ltp,
+                                p: data.p,
+                                tc: data.tc,
+                                phone: data.phone,
+                                email: data.email,
+                                profession: data.profession,
+                                clientID: data.clientID,
+                                fullName: data.fullName,
+                              )));
+                        },
+                        textInLeading: data.fullName![0].toUpperCase(),
+                        title: data.fullName!,
+                        subtitle: data.profession!);
+                  });
+        },
       ),
     );
   }

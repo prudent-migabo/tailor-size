@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tailor_size/business_logic/business_logic.dart';
 import 'package:tailor_size/config/theming.dart';
+import 'package:tailor_size/data/data.dart';
 import 'package:tailor_size/presentation/presentation.dart';
 import 'package:tailor_size/statics/assets.dart';
 import 'package:tailor_size/statics/constants.dart';
@@ -23,9 +24,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
 
-  submit(){
+  registerWithEmailAndPassword(){
     if(!_formKey.currentState!.validate()) return;
     context.read<AuthCubit>().createUser(email: _email.text.trim(), password: _password.text.trim());
+  }
+
+  signInWithGoogle() {
+    context.read<AuthCubit>().signInUserWithWithGoogle();
   }
 
   @override
@@ -49,7 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 children: [
                   Image.asset(Assets.appLogo),
                   const Padding(padding: EdgeInsets.only(top: 40)),
-                  CustomGoogleSigninButton(onPressed: () {}),
+                  CustomGoogleSigninButton(onPressed: signInWithGoogle),
                   const SizedBox(
                     height: 13,
                   ),
@@ -130,7 +135,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         return CustomButton(
                             onPressed: state.authStatus == AuthStatus.submitting
                                 ? () {}
-                                : submit,
+                                : registerWithEmailAndPassword,
                             text: state.authStatus == AuthStatus.submitting
                                 ? "Patientez..."
                                 : "S'inscrire");
