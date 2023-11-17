@@ -71,7 +71,7 @@ class AppThemeData {
       ),
     ),
     appBarTheme:  AppBarTheme(
-      backgroundColor: listTileBackgroundColor.withOpacity(.3),
+      backgroundColor: secondaryColor.withOpacity(.4),
       titleTextStyle: const TextStyle(
         fontFamily: 'Roboto',
         fontSize: 18,

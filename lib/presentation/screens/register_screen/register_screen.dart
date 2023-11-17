@@ -95,6 +95,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   TextFormField(
                     controller: _password,
+                    obscureText: true,
                     decoration: const InputDecoration(
                       hintText: 'Mot de passe *',
                       labelText: 'Mot de passe *',
@@ -109,6 +110,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 20,
                   ),
                   TextFormField(
+                    obscureText: true,
                     controller: _confirmPassword,
                     decoration: const InputDecoration(
                       hintText: 'Confirmer le mot de passe *',

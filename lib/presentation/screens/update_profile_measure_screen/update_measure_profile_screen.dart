@@ -55,18 +55,48 @@ class _UpdateMeasureProfileScreenState
     super.initState();
   }
 
+
+  onSubmit(){
+    context.read<ClientCubit>().updateClient(
+        clientModel: ClientModel(
+          fullName:
+          widget.clientArguments.clientModel.fullName,
+          profession: widget
+              .clientArguments.clientModel.profession,
+          email: widget.clientArguments.clientModel.email,
+          phone: widget.clientArguments.clientModel.phone,
+          tc: widget.clientArguments.clientModel.tc!.replaceAll('cm', ''),
+          p: widget.clientArguments.clientModel.p!.replaceAll('cm', ''),
+          ltp: widget.clientArguments.clientModel.ltp!.replaceAll('cm', ''),
+          lt: widget.clientArguments.clientModel.lt!.replaceAll('cm', ''),
+          ep: widget.clientArguments.clientModel.ep!.replaceAll('cm', ''),
+          cv: widget.clientArguments.clientModel.cv!.replaceAll('cm', ''),
+          cc2: widget.clientArguments.clientModel.cc2!.replaceAll('cm', ''),
+          cp: widget.clientArguments.clientModel.cp!.replaceAll('cm', ''),
+          cc1: widget.clientArguments.clientModel.cc1!.replaceAll('cm', ''),
+          cf: widget.clientArguments.clientModel.cf!.replaceAll('cm', ''),
+          cb2: widget.clientArguments.clientModel.cb2!.replaceAll('cm', ''),
+          c: widget.clientArguments.clientModel.c!.replaceAll('cm', ''),
+          cb1: widget.clientArguments.clientModel.cb1!.replaceAll('cm', ''),
+          shoulder: shoulderValue,
+          belly: bellyValue,
+          bust: bustValue,
+        ),
+        clientID:
+        widget.clientArguments.clientModel.clientID!);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ClientCubit, ClientState>(
       listener: (context, state) {
         if (state.clientStatus == ClientStatus.submitted) {
+          Navigator.pushNamedAndRemoveUntil(context, DashboardScreen.routeName, (route) => false);
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Mise à jour sauvegardée avec succès'),
             ),
           );
-          Navigator.pushNamedAndRemoveUntil(
-              context, DashboardScreen.routeName, (route) => false);
         } else if (state.clientStatus == ClientStatus.error) {
           errorDialog(context, content: state.error);
         }
@@ -96,35 +126,7 @@ class _UpdateMeasureProfileScreenState
                     Padding(
                       padding: const EdgeInsets.only(right: 20.0, top: 20),
                       child: GestureDetector(
-                        onTap: () {
-                          context.read<ClientCubit>().updateClient(
-                              clientModel: ClientModel(
-                                fullName:
-                                    widget.clientArguments.clientModel.fullName,
-                                profession: widget
-                                    .clientArguments.clientModel.profession,
-                                email: widget.clientArguments.clientModel.email,
-                                phone: widget.clientArguments.clientModel.phone,
-                                tc: widget.clientArguments.clientModel.tc!.replaceAll('cm', ''),
-                                p: widget.clientArguments.clientModel.p!.replaceAll('cm', ''),
-                                ltp: widget.clientArguments.clientModel.ltp!.replaceAll('cm', ''),
-                                lt: widget.clientArguments.clientModel.lt!.replaceAll('cm', ''),
-                                ep: widget.clientArguments.clientModel.ep!.replaceAll('cm', ''),
-                                cv: widget.clientArguments.clientModel.cv!.replaceAll('cm', ''),
-                                cc2: widget.clientArguments.clientModel.cc2!.replaceAll('cm', ''),
-                                cp: widget.clientArguments.clientModel.cp!.replaceAll('cm', ''),
-                                cc1: widget.clientArguments.clientModel.cc1!.replaceAll('cm', ''),
-                                cf: widget.clientArguments.clientModel.cf!.replaceAll('cm', ''),
-                                cb2: widget.clientArguments.clientModel.cb2!.replaceAll('cm', ''),
-                                c: widget.clientArguments.clientModel.c!.replaceAll('cm', ''),
-                                cb1: widget.clientArguments.clientModel.cb1!.replaceAll('cm', ''),
-                                shoulder: shoulderValue,
-                                belly: bellyValue,
-                                bust: bustValue,
-                              ),
-                              clientID:
-                                  widget.clientArguments.clientModel.clientID!);
-                        },
+                        onTap: onSubmit,
                         child: const Text(
                           'Sauvegarder',
                           style: TextStyle(color: AppThemeData.textBlack),

@@ -45,30 +45,6 @@ class _MeasureProfileScreenState extends State<MeasureProfileScreen> {
     });
   }
 
-  onSubmit(BuildContext context) {
-    context.read<ClientCubit>().createClient(ClientModel(
-      fullName: widget.clientArguments.clientModel.fullName,
-      profession: widget.clientArguments.clientModel.profession,
-      email: widget.clientArguments.clientModel.email,
-      phone: widget.clientArguments.clientModel.phone,
-      tc: widget.clientArguments.clientModel.tc,
-      p: widget.clientArguments.clientModel.p,
-      ltp: widget.clientArguments.clientModel.ltp,
-      lt: widget.clientArguments.clientModel.lt,
-      ep: widget.clientArguments.clientModel.ep,
-      cv: widget.clientArguments.clientModel.cv,
-      cc2: widget.clientArguments.clientModel.cc2,
-      cp: widget.clientArguments.clientModel.cp,
-      cc1: widget.clientArguments.clientModel.cc1,
-      cf: widget.clientArguments.clientModel.cf,
-      cb2: widget.clientArguments.clientModel.cb2,
-      c: widget.clientArguments.clientModel.c,
-      cb1: widget.clientArguments.clientModel.cb1,
-      shoulder: shoulderValue,
-      belly: bellyValue,
-      bust: bustValue,
-    ));
-  }
 
   @override
   void initState() {
@@ -80,252 +56,254 @@ class _MeasureProfileScreenState extends State<MeasureProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ClientCubit, ClientState>(
+    return BlocListener<ClientCubit, ClientState>(
       listener: (context, state) {
         if (state.clientStatus == ClientStatus.submitted){
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Client ajouté avec succès'),),);
           Navigator.pushNamedAndRemoveUntil(context, DashboardScreen.routeName, (route) => false);
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Client ajouté avec succès'),),);
         } else if (state.clientStatus == ClientStatus.error){
         errorDialog(context, content: state.error);
         }
       },
-      builder: (context, state) {
-        return state.clientStatus == ClientStatus.submitting ? CustomLoading() : Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            leading: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: const Icon(
-                Icons.arrow_back,
-                color: AppThemeData.iconBlack,
+      child: BlocBuilder<ClientCubit, ClientState>(
+        builder: (context, state){
+          return state.clientStatus == ClientStatus.submitting ? CustomLoading() : Scaffold(
+            appBar: AppBar(
+              elevation: 0,
+              leading: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: const Icon(
+                  Icons.arrow_back,
+                  color: AppThemeData.iconBlack,
+                ),
               ),
-            ),
-            title: const Text(
-              'Profile',
-              style: TextStyle(
-                  color: AppThemeData.textBlack, fontWeight: FontWeight.normal),
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 20.0, top: 20),
-                child: GestureDetector(
-                  onTap: (){
-                    context.read<ClientCubit>().createClient(ClientModel(
-                      fullName: widget.clientArguments.clientModel.fullName,
-                      profession: widget.clientArguments.clientModel.profession,
-                      email: widget.clientArguments.clientModel.email,
-                      phone: widget.clientArguments.clientModel.phone,
-                      tc: widget.clientArguments.clientModel.tc,
-                      p: widget.clientArguments.clientModel.p,
-                      ltp: widget.clientArguments.clientModel.ltp,
-                      lt: widget.clientArguments.clientModel.lt,
-                      ep: widget.clientArguments.clientModel.ep,
-                      cv: widget.clientArguments.clientModel.cv,
-                      cc2: widget.clientArguments.clientModel.cc2,
-                      cp: widget.clientArguments.clientModel.cp,
-                      cc1: widget.clientArguments.clientModel.cc1,
-                      cf: widget.clientArguments.clientModel.cf,
-                      cb2: widget.clientArguments.clientModel.cb2,
-                      c: widget.clientArguments.clientModel.c,
-                      cb1: widget.clientArguments.clientModel.cb1,
-                      shoulder: shoulderValue,
-                      belly: bellyValue,
-                      bust: bustValue,
-                    ));
-                  },
-                  child: const Text(
-                    'Sauvegarder',
-                    style: TextStyle(color: AppThemeData.textBlack),
+              title: const Text(
+                'Profile',
+                style: TextStyle(
+                    color: AppThemeData.textBlack, fontWeight: FontWeight.normal),
+              ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 20.0, top: 0),
+                  child: GestureDetector(
+                    onTap: (){
+                      context.read<ClientCubit>().createClient(ClientModel(
+                        fullName: widget.clientArguments.clientModel.fullName,
+                        profession: widget.clientArguments.clientModel.profession,
+                        email: widget.clientArguments.clientModel.email,
+                        phone: widget.clientArguments.clientModel.phone,
+                        tc: widget.clientArguments.clientModel.tc,
+                        p: widget.clientArguments.clientModel.p,
+                        ltp: widget.clientArguments.clientModel.ltp,
+                        lt: widget.clientArguments.clientModel.lt,
+                        ep: widget.clientArguments.clientModel.ep,
+                        cv: widget.clientArguments.clientModel.cv,
+                        cc2: widget.clientArguments.clientModel.cc2,
+                        cp: widget.clientArguments.clientModel.cp,
+                        cc1: widget.clientArguments.clientModel.cc1,
+                        cf: widget.clientArguments.clientModel.cf,
+                        cb2: widget.clientArguments.clientModel.cb2,
+                        c: widget.clientArguments.clientModel.c,
+                        cb1: widget.clientArguments.clientModel.cb1,
+                        shoulder: shoulderValue,
+                        belly: bellyValue,
+                        bust: bustValue,
+                      ));
+                    },
+                    child: const Text(
+                      'Sauvegarder',
+                      style: TextStyle(color: AppThemeData.textBlack),
+                    ),
                   ),
-                ),
-              ),
-            ],
-          ),
-          body: SingleChildScrollView(
-            padding: padding20,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Epaules'),
-                const SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Expanded(
-                      child: GestureDetector(onTap: () {
-                        context.read<SelectShoulderCubit>().selectShoulder(1);
-                        setShoulder(1);
-                      }, child: BlocBuilder<SelectShoulderCubit, int>(
-                        builder: (context, state) {
-                          return state == 1
-                              ? const ProfileCategorySelector(
-                            image: Assets.shoulder1,
-                          )
-                              : Image.asset(Assets.shoulder1);
-                        },
-                      ),),
-                    ),
-                    Expanded(
-                        child: GestureDetector(
-                            onTap: () {
-                              context
-                                  .read<SelectShoulderCubit>()
-                                  .selectShoulder(2);
-                              setShoulder(2);
-                            },
-                            child: BlocBuilder<SelectShoulderCubit, int>(
-                              builder: (context, state) {
-                                return state == 2
-                                    ? const ProfileCategorySelector(
-                                  image: Assets.shoulder2,
-                                )
-                                    : Image.asset(Assets.shoulder2);
-                              },
-                            ))),
-                    Expanded(
-                        child: GestureDetector(
-                            onTap: () {
-                              context
-                                  .read<SelectShoulderCubit>()
-                                  .selectShoulder(3);
-                              setShoulder(3);
-                            },
-                            child: BlocBuilder<SelectShoulderCubit, int>(
-                              builder: (context, state) {
-                                return state == 3
-                                    ? const ProfileCategorySelector(
-                                  image: Assets.shoulder3,
-                                )
-                                    : Image.asset(Assets.shoulder3);
-                              },
-                            ))),
-                  ],
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                const Text('Ventre'),
-                const SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: GestureDetector(onTap: () {
-                        context.read<SelectBellyCubit>().selectBelly(1);
-                        setBelly(1);
-                      }, child: BlocBuilder<SelectBellyCubit, int>(
-                        builder: (context, state) {
-                          return state == 1
-                              ? const ProfileCategorySelector(
-                            image: Assets.belly1,
-                          )
-                              : Image.asset(Assets.belly1);
-                        },
-                      ),),
-                    ),
-                    Expanded(
-                        child: GestureDetector(
-                            onTap: () {
-                              context.read<SelectBellyCubit>().selectBelly(2);
-                              setBelly(2);
-                            },
-                            child: BlocBuilder<SelectBellyCubit, int>(
-                              builder: (context, state) {
-                                return state == 2
-                                    ? const ProfileCategorySelector(
-                                  image: Assets.belly2,
-                                )
-                                    : Image.asset(Assets.belly2);
-                              },
-                            ))),
-                    Expanded(
-                        child: GestureDetector(
-                            onTap: () {
-                              context
-                                  .read<SelectBellyCubit>()
-                                  .selectBelly(3);
-                              setBelly(3);
-                            },
-                            child: BlocBuilder<SelectBellyCubit, int>(
-                              builder: (context, state) {
-                                return state == 3
-                                    ? const ProfileCategorySelector(
-                                  image: Assets.belly3,
-                                )
-                                    : Image.asset(Assets.belly3);
-                              },
-                            ))),
-                  ],
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                const Text('Buste'),
-                const SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: GestureDetector(onTap: () {
-                        context.read<SelectBustCubit>().selectBust(1);
-                        setBust(1);
-                      }, child: BlocBuilder<SelectBustCubit, int>(
-                        builder: (context, state) {
-                          return state == 1
-                              ? const ProfileCategorySelector(
-                            image: Assets.bust1,
-                          )
-                              : Image.asset(Assets.bust1);
-                        },
-                      ),),
-                    ),
-                    Expanded(
-                        child: GestureDetector(
-                            onTap: () {
-                              context
-                                  .read<SelectBustCubit>()
-                                  .selectBust(2);
-                              setBust(2);
-                            },
-                            child: BlocBuilder<SelectBustCubit, int>(
-                              builder: (context, state) {
-                                return state == 2
-                                    ? const ProfileCategorySelector(
-                                  image: Assets.bust2,
-                                )
-                                    : Image.asset(Assets.bust2);
-                              },
-                            ))),
-                    Expanded(
-                        child: GestureDetector(
-                            onTap: () {
-                              context
-                                  .read<SelectBustCubit>()
-                                  .selectBust(3);
-                              setBust(3);
-                            },
-                            child: BlocBuilder<SelectBustCubit, int>(
-                              builder: (context, state) {
-                                return state == 3
-                                    ? const ProfileCategorySelector(
-                                  image: Assets.bust3,
-                                )
-                                    : Image.asset(Assets.bust3);
-                              },
-                            ))),
-                  ],
                 ),
               ],
             ),
-          ),
-        );
-      },
+            body: SingleChildScrollView(
+              padding: padding20,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Epaules'),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Expanded(
+                        child: GestureDetector(onTap: () {
+                          context.read<SelectShoulderCubit>().selectShoulder(1);
+                          setShoulder(1);
+                        }, child: BlocBuilder<SelectShoulderCubit, int>(
+                          builder: (context, state) {
+                            return state == 1
+                                ? const ProfileCategorySelector(
+                              image: Assets.shoulder1,
+                            )
+                                : Image.asset(Assets.shoulder1);
+                          },
+                        ),),
+                      ),
+                      Expanded(
+                          child: GestureDetector(
+                              onTap: () {
+                                context
+                                    .read<SelectShoulderCubit>()
+                                    .selectShoulder(2);
+                                setShoulder(2);
+                              },
+                              child: BlocBuilder<SelectShoulderCubit, int>(
+                                builder: (context, state) {
+                                  return state == 2
+                                      ? const ProfileCategorySelector(
+                                    image: Assets.shoulder2,
+                                  )
+                                      : Image.asset(Assets.shoulder2);
+                                },
+                              ))),
+                      Expanded(
+                          child: GestureDetector(
+                              onTap: () {
+                                context
+                                    .read<SelectShoulderCubit>()
+                                    .selectShoulder(3);
+                                setShoulder(3);
+                              },
+                              child: BlocBuilder<SelectShoulderCubit, int>(
+                                builder: (context, state) {
+                                  return state == 3
+                                      ? const ProfileCategorySelector(
+                                    image: Assets.shoulder3,
+                                  )
+                                      : Image.asset(Assets.shoulder3);
+                                },
+                              ))),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  const Text('Ventre'),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: GestureDetector(onTap: () {
+                          context.read<SelectBellyCubit>().selectBelly(1);
+                          setBelly(1);
+                        }, child: BlocBuilder<SelectBellyCubit, int>(
+                          builder: (context, state) {
+                            return state == 1
+                                ? const ProfileCategorySelector(
+                              image: Assets.belly1,
+                            )
+                                : Image.asset(Assets.belly1);
+                          },
+                        ),),
+                      ),
+                      Expanded(
+                          child: GestureDetector(
+                              onTap: () {
+                                context.read<SelectBellyCubit>().selectBelly(2);
+                                setBelly(2);
+                              },
+                              child: BlocBuilder<SelectBellyCubit, int>(
+                                builder: (context, state) {
+                                  return state == 2
+                                      ? const ProfileCategorySelector(
+                                    image: Assets.belly2,
+                                  )
+                                      : Image.asset(Assets.belly2);
+                                },
+                              ))),
+                      Expanded(
+                          child: GestureDetector(
+                              onTap: () {
+                                context
+                                    .read<SelectBellyCubit>()
+                                    .selectBelly(3);
+                                setBelly(3);
+                              },
+                              child: BlocBuilder<SelectBellyCubit, int>(
+                                builder: (context, state) {
+                                  return state == 3
+                                      ? const ProfileCategorySelector(
+                                    image: Assets.belly3,
+                                  )
+                                      : Image.asset(Assets.belly3);
+                                },
+                              ))),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  const Text('Buste'),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: GestureDetector(onTap: () {
+                          context.read<SelectBustCubit>().selectBust(1);
+                          setBust(1);
+                        }, child: BlocBuilder<SelectBustCubit, int>(
+                          builder: (context, state) {
+                            return state == 1
+                                ? const ProfileCategorySelector(
+                              image: Assets.bust1,
+                            )
+                                : Image.asset(Assets.bust1);
+                          },
+                        ),),
+                      ),
+                      Expanded(
+                          child: GestureDetector(
+                              onTap: () {
+                                context
+                                    .read<SelectBustCubit>()
+                                    .selectBust(2);
+                                setBust(2);
+                              },
+                              child: BlocBuilder<SelectBustCubit, int>(
+                                builder: (context, state) {
+                                  return state == 2
+                                      ? const ProfileCategorySelector(
+                                    image: Assets.bust2,
+                                  )
+                                      : Image.asset(Assets.bust2);
+                                },
+                              ))),
+                      Expanded(
+                          child: GestureDetector(
+                              onTap: () {
+                                context
+                                    .read<SelectBustCubit>()
+                                    .selectBust(3);
+                                setBust(3);
+                              },
+                              child: BlocBuilder<SelectBustCubit, int>(
+                                builder: (context, state) {
+                                  return state == 3
+                                      ? const ProfileCategorySelector(
+                                    image: Assets.bust3,
+                                  )
+                                      : Image.asset(Assets.bust3);
+                                },
+                              ))),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:tailor_size/data/data.dart';
+import 'package:tailor_size/statics/statics.dart';
 
 part 'client_state.dart';
 
@@ -26,7 +27,7 @@ class ClientCubit extends Cubit<ClientState> {
       await ClientRepository().createClient(clientModel.toMap());
       emit(state.copyWith(clientStatus: ClientStatus.submitted),);
     } catch (e){
-      emit(state.copyWith(clientStatus: ClientStatus.error, error: e.toString()),);
+      emit(state.copyWith(clientStatus: ClientStatus.error, error: errorMessage),);
     }
   }
 
@@ -36,7 +37,7 @@ class ClientCubit extends Cubit<ClientState> {
       await ClientRepository().updateClient(data: clientModel.toMap(), clientID: clientID);
       emit(state.copyWith(clientStatus: ClientStatus.submitted),);
     } catch (e){
-      emit(state.copyWith(clientStatus: ClientStatus.error, error: e.toString()),);
+      emit(state.copyWith(clientStatus: ClientStatus.error, error: errorMessage),);
     }
   }
 

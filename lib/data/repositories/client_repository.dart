@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tailor_size/data/data.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ClientRepository {
   CollectionReference clientRef =
-      FirebaseFirestore.instance.collection('clients');
+      FirebaseFirestore.instance.collection('clients').doc(FirebaseAuth.instance.currentUser!.uid).collection('mes clients');
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   Future<void> createClient(Map<String, dynamic> data) async {
     await clientRef.add(data);
@@ -47,6 +49,24 @@ class ClientRepository {
         .orderBy('createdAt', descending: true)
         .snapshots()
         .map((event) => event.docs.map((e) => ClientModel.fromMap(e)).toList());
+  }
+
+  Future<QuerySnapshot> listClientsByTapedName(String fullName) async{
+    var result;
+    var res =await clientRef
+        .where('fullName', arrayContains: fullName)
+        .orderBy('createdAt', descending: true)
+        .get().then((value) {
+          result = value.docs;
+          print('ttttttttttttttttt$result');
+    });
+    return result;
+  }
+
+
+
+  Future<void> deleteClient (String clientID) async{
+    await clientRef.doc(clientID).delete();
   }
 
 }

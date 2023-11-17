@@ -17,7 +17,7 @@ class CustomCardListTile extends StatelessWidget {
       onTap: onPressed,
       child: Card(
         elevation: 0,
-        color: AppThemeData.listTileBackgroundColor.withOpacity(.3),
+        color: AppThemeData.secondaryColor.withOpacity(.4),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
           side:  const BorderSide(color: AppThemeData.backgroundGrey, width: 0.5),

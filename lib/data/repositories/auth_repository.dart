@@ -21,6 +21,7 @@ class AuthRepository{
   // SignOut user
   Future signOutUser () async{
     await auth.signOut();
+    await FirebaseFirestore.instance.clearPersistence();
   }
 
 

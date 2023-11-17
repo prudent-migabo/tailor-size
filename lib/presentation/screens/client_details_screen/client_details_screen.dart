@@ -35,7 +35,9 @@ class ClientDetailsScreen extends StatelessWidget {
               color: AppThemeData.textBlack, fontWeight: FontWeight.normal),
         ),
         actions: [
-          SvgPicture.asset(Assets.shareIcon),
+          GestureDetector(
+              onTap: () {},
+              child: SvgPicture.asset(Assets.shareIcon)),
           const SizedBox(
             width: 20,
           ),
@@ -43,7 +45,8 @@ class ClientDetailsScreen extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(
                   context, UpdateClientPersonalDetails.routeName,
-                  arguments: ClientArguments(clientModel: ClientModel(
+                  arguments: ClientArguments(
+                      clientModel: ClientModel(
                     bust: clientArguments.clientModel.bust,
                     belly: clientArguments.clientModel.belly,
                     shoulder: clientArguments.clientModel.shoulder,
@@ -79,7 +82,7 @@ class ClientDetailsScreen extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: AppThemeData.listTileBackgroundColor.withOpacity(.2),
+            color: AppThemeData.secondaryColor.withOpacity(.4),
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: AppThemeData.backgroundGrey),
           ),
@@ -102,19 +105,30 @@ class ClientDetailsScreen extends StatelessWidget {
                 ),
               ),
               UserBody(
-                  lt:'${clientArguments.clientModel.lt!.replaceAll(' ', '')} cm',
-                  cv: '${clientArguments.clientModel.cv!.replaceAll(' ', '')} cm',
-                  cp: '${clientArguments.clientModel.cp!.replaceAll(' ', '')} cm',
-                  ep: '${clientArguments.clientModel.ep!.replaceAll(' ', '')} cm',
+                  lt:
+                      '${clientArguments.clientModel.lt!.replaceAll(' ', '')} cm',
+                  cv:
+                      '${clientArguments.clientModel.cv!.replaceAll(' ', '')} cm',
+                  cp:
+                      '${clientArguments.clientModel.cp!.replaceAll(' ', '')} cm',
+                  ep:
+                      '${clientArguments.clientModel.ep!.replaceAll(' ', '')} cm',
                   c: '${clientArguments.clientModel.c!.replaceAll(' ', '')} cm',
-                  cb1: '${clientArguments.clientModel.cb1!.replaceAll(' ', '')} cm',
-                  cb2: '${clientArguments.clientModel.cb2!.replaceAll(' ', '')} cm',
-                  cc1: '${clientArguments.clientModel.cc1!.replaceAll(' ', '')} cm',
-                  cf: '${clientArguments.clientModel.cf!.replaceAll(' ', '')} cm',
-                  cc2: '${clientArguments.clientModel.cc2!.replaceAll(' ', '')} cm',
-                  tc: '${clientArguments.clientModel.tc!.replaceAll(' ', '')} cm',
+                  cb1:
+                      '${clientArguments.clientModel.cb1!.replaceAll(' ', '')} cm',
+                  cb2:
+                      '${clientArguments.clientModel.cb2!.replaceAll(' ', '')} cm',
+                  cc1:
+                      '${clientArguments.clientModel.cc1!.replaceAll(' ', '')} cm',
+                  cf:
+                      '${clientArguments.clientModel.cf!.replaceAll(' ', '')} cm',
+                  cc2:
+                      '${clientArguments.clientModel.cc2!.replaceAll(' ', '')} cm',
+                  tc:
+                      '${clientArguments.clientModel.tc!.replaceAll(' ', '')} cm',
                   p: '${clientArguments.clientModel.p!.replaceAll(' ', '')} cm',
-                  ltp: '${clientArguments.clientModel.ltp!.replaceAll(' ', '')} cm'),
+                  ltp:
+                      '${clientArguments.clientModel.ltp!.replaceAll(' ', '')} cm'),
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Divider(

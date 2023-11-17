@@ -74,7 +74,7 @@ class _MeasureScreenState extends State<MeasureScreen> {
         ),
         actions:  [
           Padding(
-            padding: const EdgeInsets.only(right: 20.0, top: 20),
+            padding: const EdgeInsets.only(right: 20.0, top: 0),
             child: GestureDetector(
               onTap: onSubmit,
                 child: const Text('Suivant', style: TextStyle(color: AppThemeData.textBlack),),),

@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 import 'package:tailor_size/data/data.dart';
+import 'package:tailor_size/statics/constants.dart';
 import 'package:tailor_size/utils/utils.dart';
 
 part 'auth_state.dart';
@@ -19,7 +20,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(state.copyWith(authStatus: AuthStatus.error, error: AuthExceptionHandler.generateExceptionMessage(e.code)));
     }
     catch (e){
-      emit(state.copyWith(authStatus: AuthStatus.error, error: e.toString()));
+      emit(state.copyWith(authStatus: AuthStatus.error, error: errorMessage));
     }
   }
 
@@ -33,7 +34,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(state.copyWith(authStatus: AuthStatus.error, error: AuthExceptionHandler.generateExceptionMessage(e.code)));
     }
     catch (e){
-      emit(state.copyWith(authStatus: AuthStatus.error, error: e.toString()));
+      emit(state.copyWith(authStatus: AuthStatus.error, error: errorMessage));
     }
   }
 
@@ -47,7 +48,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(state.copyWith(authStatus: AuthStatus.error, error: AuthExceptionHandler.generateExceptionMessage(e.code)));
     }
     catch (e){
-      emit(state.copyWith(authStatus: AuthStatus.error, error: e.toString()));
+      emit(state.copyWith(authStatus: AuthStatus.error, error: errorMessage));
     }
   }
 
@@ -61,7 +62,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(state.copyWith(authStatus: AuthStatus.error, error: AuthExceptionHandler.generateExceptionMessage(e.code)));
     }
     catch (e){
-      emit(state.copyWith(authStatus: AuthStatus.error, error: e.toString()));
+      emit(state.copyWith(authStatus: AuthStatus.error, error: errorMessage));
     }
   }
 

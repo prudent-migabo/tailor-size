@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tailor_size/config/theming.dart';
 import 'package:tailor_size/data/data.dart';
+import 'package:tailor_size/main.dart';
 import 'package:tailor_size/presentation/presentation.dart';
 
 Widget navigationDrawer (BuildContext context) {
@@ -7,21 +9,21 @@ Widget navigationDrawer (BuildContext context) {
     width: MediaQuery.of(context).size.width * 0.85,
     height: MediaQuery.of(context).size.height,
     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-    color: Colors.white,
+    color: AppThemeData.scaffoldColor,
     child: Column(
       children: [
         GestureDetector(
-          onTap: (){
-            AuthRepository().signOutUser();
-            Navigator.pushNamedAndRemoveUntil(
-                context, WelcomeScreen.routeName, (route) => false);
+          onTap: () async{
+           await AuthRepository().signOutUser().whenComplete(() => Navigator.pushNamedAndRemoveUntil(
+                context, WelcomeScreen.routeName, (route) => false));
+            // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const MyApp()), (route) => false);
           },
           child: const ListTile(
             leading: Icon(Icons.logout),
             title: Text('Se deconnecter'),
           ),
         ),
-        Divider(),
+        Divider(color: Colors.grey,height: 0.7, thickness: 0.4,),
       ],
     ),
   );

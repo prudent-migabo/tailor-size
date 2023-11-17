@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:tailor_size/business_logic/business_logic.dart';
 import 'package:tailor_size/config/theming.dart';
 import 'package:tailor_size/data/data.dart';
@@ -34,7 +35,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       drawer: navigationDrawer(context),
       appBar: AppBar(
         elevation: 0,
-        // backgroundColor: AppThemeData.listTileBackgroundColor.withOpacity(.3),
         leading: Padding(
           padding: const EdgeInsets.only(left: 20.0),
           child: Builder(
@@ -108,38 +108,55 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   itemCount: state.clients.length,
                   itemBuilder: (context, index) {
                     final data = state.clients[index];
-                    return CustomCardListTile(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                              context, ClientDetailsScreen.routeName,
-                              arguments: ClientArguments(
-                                  clientModel: ClientModel(
-                                bust: data.bust,
-                                belly: data.belly,
-                                shoulder: data.shoulder,
-                                cb1: data.cb1,
-                                c: data.c,
-                                cb2: data.cb2,
-                                cf: data.cf,
-                                cc1: data.cc1,
-                                cp: data.cp,
-                                cc2: data.cc2,
-                                cv: data.cv,
-                                ep: data.ep,
-                                lt: data.lt,
-                                ltp: data.ltp,
-                                p: data.p,
-                                tc: data.tc,
-                                phone: data.phone,
-                                email: data.email,
-                                profession: data.profession,
-                                clientID: data.clientID,
-                                fullName: data.fullName,
-                              )));
-                        },
-                        textInLeading: data.fullName![0].toUpperCase(),
-                        title: data.fullName!,
-                        subtitle: data.profession!);
+                    return Slidable(
+                      endActionPane: ActionPane(
+                        motion: ScrollMotion(),
+                        children: [
+                          SlidableAction(
+                            onPressed: (val) {
+                              ClientRepository().deleteClient(data.clientID!);
+                            },
+                            backgroundColor: AppThemeData.textError,
+                            foregroundColor: Colors.white,
+                            icon: Icons.delete,
+                            label: 'Supprimer',
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ],
+                      ),
+                      child: CustomCardListTile(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, ClientDetailsScreen.routeName,
+                                arguments: ClientArguments(
+                                    clientModel: ClientModel(
+                                  bust: data.bust,
+                                  belly: data.belly,
+                                  shoulder: data.shoulder,
+                                  cb1: data.cb1,
+                                  c: data.c,
+                                  cb2: data.cb2,
+                                  cf: data.cf,
+                                  cc1: data.cc1,
+                                  cp: data.cp,
+                                  cc2: data.cc2,
+                                  cv: data.cv,
+                                  ep: data.ep,
+                                  lt: data.lt,
+                                  ltp: data.ltp,
+                                  p: data.p,
+                                  tc: data.tc,
+                                  phone: data.phone,
+                                  email: data.email,
+                                  profession: data.profession,
+                                  clientID: data.clientID,
+                                  fullName: data.fullName,
+                                )));
+                          },
+                          textInLeading: data.fullName![0].toUpperCase(),
+                          title: data.fullName!,
+                          subtitle: data.profession!),
+                    );
                   });
         },
       ),
