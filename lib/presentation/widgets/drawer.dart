@@ -28,7 +28,7 @@ Widget navigationDrawer(BuildContext context) {
             title: Text('Se deconnecter'),
           ),
         ),
-        Divider(
+        const Divider(
           color: Colors.grey,
           height: 0.7,
           thickness: 0.4,

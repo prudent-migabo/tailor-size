@@ -20,6 +20,7 @@ class _ClientPersonalDetailsState extends State<ClientPersonalDetails> {
   final TextEditingController _phone = TextEditingController();
   final TextEditingController _email = TextEditingController();
   String profession = '';
+  String other = '';
 
   onSubmit(){
     if(!_formKey.currentState!.validate()) return;
