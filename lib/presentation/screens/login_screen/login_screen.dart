@@ -129,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      'Mot de passe oublié?',
+                      'Mot de passe oublié ?',
                       style: TextStyle(
                           color: Colors.blue, fontSize: 12, fontWeight: bold),
                     ),
